@@ -77,11 +77,11 @@ function isPangram(str) {
    split = str.toLowerCase().split('');
    split.sort().reverse(); // array.prototype.sort uses Timsort on V8 v7.0+
    for (let i = 0; i < split.length; i++) {
-      if (split[i] === split[i].toUpperCase()) { split.length = i; }
+      if (split[i] === split[i].toUpperCase()) { split.length = i; } // chop off end of array once we hit the items that aren't letters
    }
    let unique = new Set(split);
    return unique.size === 26;
-}
+} // This could probably be faster if we created the Set before looping through and chopping off the items that aren't letters. In that case, it would loop a maximum of 26 times, making that loop O(26) == O(1). Whole function would still be at least O(n) though due to .sort()
 
 console.log('isPangram results:');
 console.log(isPangram("The quick brown fox jumps over the lazy dog!"));
